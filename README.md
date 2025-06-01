@@ -27,7 +27,6 @@ The Hamiltonian in k-space is a 2×2 matrix representing the two-site unit cell
 Results in two energy bands (valence and conduction bands)
 
 3. Finite Chain with Periodic Boundary Conditions (PBC)
-matlab
 H_pbc = zeros(2*N);
 for i = 1:N
     % Intra-cell hopping
@@ -53,7 +52,6 @@ The chain forms a ring where the last cell connects back to the first
 Results in discrete energy levels that approximate the infinite chain
 
 4. Finite Chain with Open Boundary Conditions (OBC)
-matlab
 H_obc = zeros(2*N);
 for i = 1:N
     % Intra-cell hopping
@@ -73,7 +71,6 @@ The chain has true endpoints with no connection between first and last sites
 May show edge states in the topological phase
 
 5. Topological Invariant Calculation (Winding Number)
-matlab
 d_vector = zeros(2, length(k));
 for i = 1:length(k)
     dx = t1 + t2*cos(k(i));
@@ -132,7 +129,6 @@ Here's an explanation of the key differences between the Open Boundary Condition
 1. Hamiltonian Construction Differences
 OBC Implementation (Current Code):
 
-matlab
 % Inter-cell hopping (t2)
 if i < N  % Only connect interior cells
     H_finite(2*i, 2*i+1) = t2;
@@ -140,7 +136,6 @@ if i < N  % Only connect interior cells
 end
 PBC Implementation (Comparison):
 
-matlab
 % Inter-cell hopping (t2) - regular terms
 if i < N
     H_pbc(2*i, 2*i+1) = t2;
@@ -162,13 +157,11 @@ This difference crucially affects edge state formation in topological phases
 2. Spectral Differences
 OBC Features (Shown in Code):
 
-matlab
 plot(E, 'o', 'MarkerSize', 8);  % Will show:
 % - Possible zero-energy edge states when |t1| < |t2|
 % - Bulk states that don't form continuous bands
 PBC Features (For Comparison):
 
-matlab
 plot(E_pbc, 'o', 'MarkerSize', 8);  % Would show:
 % - No zero-energy states (gap remains open)
 % - States approximate the infinite band structure
@@ -183,7 +176,6 @@ The winding number calculation (done earlier in the code) predicts OBC edge stat
 3. Edge State Visualization (Unique to OBC)
 Current OBC Code:
 
-matlab
 if abs(t1) < abs(t2)  % Topological phase check
     plot(abs(psi(:,1)).^2);  % Shows localized edge state
 end
